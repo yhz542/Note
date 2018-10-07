@@ -1,0 +1,41 @@
+设两数为a 、b( a > b )，用 gcd( a , b )  表示a，b的最大公约数，r=a % b , 为a除以b的余数，k 为 a 整除 b 的商，即 a = bk + r   。辗转相除法即是要证明  gcd( a , b ) = gcd( b , r )。
+第一步：令 c = gcd( a , b ) ，即c 为 a , b 的公约数 ，则设 a = mc , b = nc ;  
+第二步：因为 a = bk + r 所以 r = a - kb = mc - knc =( m - kn )c
+第三步：因为 r = ( m - kn ) c , 所以 c 为 r 的因子。
+第四步：m - kn 与 n 互质（ 借此退出 b 与 r 的最大公约数也为 c ， 由此证明gcd( a , b )= gcd( b , r ) ）
+
+证明 m - kn 与 n 互质:
+反证法:
+即设 m-kn 与 n 不互质，则设二者有最大公约数 d (  d > 1  如果等于1 说明互质) 
+则 m - kn = xd , n = yd 
+那么 m = kn +xd = kyd+ xd =(ky+x)d
+a = mc = (ky+x)cd
+b = nc = ycd
+则 a ,b 有公约数 cd 又因为 d >1所以 cd > c 则c 不是a,b的最大公约数与已知条件矛盾
+所以 m- kn 与 n 互质
+即最大公约数为1
+
+第五步：b = nc   , r = ( m-kn)c,因为 m-kn与n互质所以 b , r 有最大公约数 c .
+所以 gcd( b ,r ) = gcd( a ,b) = c
+证毕
+
+另 m , n 互质
+证明 假使 m , n 不互质
+则设 gcd( m , n )  = u   , m = iu , n = ju ( u>1)
+a = mc = iuc , b = nc = juc
+则a ,b 有公约数 uc >c与条件矛盾
+所以 m ,n 互质
+
+以上步骤的操作是建立在刚开始时 r!=0 的基础之上
+当r == 0 时 即 gcd( b , 0 )时 b为最大公约数
+
+注意 a 一定 > b 
+当r==0 时 跳出循环
+伪代码
+function gcd(a,b) 
+{
+    if b!=0 ：
+        return gcd( b, a % b ) ;
+    else
+        return a；
+}
