@@ -1,0 +1,127 @@
+创建数据库
+create database 名字
+删除数据库
+drop database 名字
+显示所有数据库
+show databases;
+
+
+
+使用某个数据库
+use 数据库名字(可以不加分号)
+
+显示数据库中的表（要先使用use）
+show tables;
+
+删除表
+drop table 表名字;
+
+创建表
+create table 表名字
+( 属性名 类型,
+  属性名 类型,
+......);
+
+查看表的数据结构（表的各属性类型）
+describe 表名字;
+
+
+增加数据表的列（属性类型）
+alter table 表名字 add 属性名 类型 [not null] [default](默认值) ; not null default 可选
+
+eg:alter table account add c1 int(11) not null default 1;
+
+删除数据表的列
+alter table 表名字 drop 属性名
+
+eg:alter table account drop c1;
+
+修改列信息
+alter table 表名字 change 旧属性名 新属性名 类型
+alter table account change newcity newcity text;
+
+修改表名
+alter table 表名字 rename 新表名字
+eg:alter table account rename newaccount;
+
+查看表数据
+select * from 表名字;
+
+select 属性名1，属性名2 ， ... from 表名字;
+
+插入数据
+
+insert into 表名字 values(value1,value2,...);
+
+insert into 表名字 (属性名1,属性名2...) value( values1,value2...);
+
+where语法
+
+select * from 表名字 where 属性名 运算符 value;
+eg:select *from book where title = 't';
+
+between 在两个值之间查找
+like 按某个模式查找
+
+组合条件 and、or
+
+select *from 表名字 where 属性名 运算符 value1 and 属性名 运算符 value2 or 属性名 运算符 value3;
+
+null判断
+
+select * from 表名字 where 属性名 is null/not null;
+
+distinct(去重)
+
+select distinct col_name from table_name ;
+
+eg:select distinct title from book;
+
+order by
+
+按单一列名排序:
+select * from table_name [where 子句] order by col_name [asc/dsc];默认升序
+
+按多列排序:
+select * from table_name [where 子句] order by col1[asc/dsc],col2[asc/desc]...
+
+limit
+
+select * from table_name [where sentence] [order by] limit[offset,] rowCount
+
+offset(可选):查询结果的起始位置, 第一条记录为0；
+rowCount(必填):从offset位置开始，获取的记录条数
+
+limit rowCount = limit 0 , rowCount
+
+insert into 与 select 组合使用 (将一张表的数据存到另一张表)
+
+insert into table_name1 select from table_name2;
+
+insert into table_name1(col) select col from table_name2;
+
+update
+
+修改单列：
+update table_name set col = value [ where sentence];
+
+修改多列：
+update table_name set col1 = value,col2 = value[where sentence];
+
+where in
+
+select * from table_name where column_name in (value1,value2...);
+
+select * from table_name where column_name in ( select column_name from table_name );
+
+where between
+
+select * from table_name where column_name between value1 and value2;
+
+select * from table_name where column_name not between value1 and value2;
+
+where like:
+
+select * from table_name where column_name [not](可选) like pattern;
+
+pattern:匹配模式 '%str','str%','%str%','str' %是一个通配符，理解上可以把它座位任何字符串
